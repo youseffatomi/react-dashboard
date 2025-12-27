@@ -1,25 +1,72 @@
 import { Button, Checkbox, Label, TextInput } from "flowbite-react";
+import { useFormik } from "formik";
 import { Link } from "react-router";
 
 export default function Signin() {
+  const formik = useFormik({
+    initialValues: { username: "", password: "" },
+    validate(values) {
+      const err = { username: "", password: "" };
+
+      if (!values.username) {
+        err.username = "نام کاربری نمیتواند خالی باشد";
+      } else if (!values.password) {
+        err.password = "رمز  عبور نمیتواند خالی باشد";
+      }
+
+      return err;
+    },
+
+    onSubmit(values) {
+      console.log(values);
+    },
+  });
+
   return (
-    <form className="flex flex-col gap-4">
+    <form className="flex flex-col gap-4" onSubmit={formik.handleSubmit}>
+      <div className="grid grid-cols-2 place-items-center text-gray-500">
+        <div>
+          <span>نام کاربری :</span>
+          <span>emilys</span>
+        </div>
+        <div>
+          <span>رمز عبور :</span>
+          <span>emilyspass</span>
+        </div>
+      </div>
       <div>
         <div className="mb-2 block">
-          <Label htmlFor="email1">ایمیل یا نام کاربری</Label>
+          <Label htmlFor="username">
+            ایمیل یا نام کاربری
+            <span className="mr-3 inline-block text-red-400">
+              {formik.errors.username}
+            </span>
+          </Label>
         </div>
         <TextInput
-          id="email1"
-          type="email"
-          placeholder="name@flowbite.com"
-          required
+          id="username"
+          name="username"
+          placeholder="name@flexo.com"
+          onChange={formik.handleChange}
+          value={formik.values.username}
         />
       </div>
       <div>
         <div className="mb-2 block">
-          <Label htmlFor="password1">رمز عبور</Label>
+          <Label htmlFor="password1">
+            رمز عبور
+            <span className="mr-3 inline-block text-red-400">
+              {formik.errors.password}
+            </span>
+          </Label>
         </div>
-        <TextInput id="password1" type="password" required />
+        <TextInput
+          id="password1"
+          name="password"
+          type="password"
+          onChange={formik.handleChange}
+          value={formik.values.password}
+        />
       </div>
       <div className="flex items-center gap-2">
         <Checkbox id="remember" />

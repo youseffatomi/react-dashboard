@@ -1,25 +1,25 @@
-import { Outlet } from "react-router";
+import { useEffect } from "react";
+import { Outlet, useNavigate } from "react-router";
 
-export default function Layout (){
+export default function Layout() {
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    const Token = localStorage.getItem("token");
 
-    return (<div>
+    if (!Token) navigate("/auth");
+  });
 
-    <header>header</header>
+  return (
+    <div>
+      <header>header</header>
 
-    <section>
-        <aside>
-            aside
-        </aside>
+      <section>
+        <aside>aside</aside>
         <main>
-
-            <Outlet/>
+          <Outlet />
         </main>
-    </section>
-
-
-
-    </div>)
-
-
+      </section>
+    </div>
+  );
 }

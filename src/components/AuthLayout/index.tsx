@@ -1,8 +1,17 @@
 import { Card } from "flowbite-react";
-import { Outlet } from "react-router";
+import { Outlet, useNavigate } from "react-router";
 import Logo from "./../../assets/images/SVG/logo.svg";
+import { useEffect } from "react";
 
 export default function AuthLayout() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const Token = localStorage.getItem("token");
+
+    if (Token) navigate("/");
+  });
+
   return (
     <main className="container mx-auto px-3 pt-2 lg:pt-5">
       <section className="grid min-h-screen place-items-center">
