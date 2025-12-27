@@ -1,0 +1,36 @@
+@import "tailwindcss";
+@source "../../.flowbite-react/class-list.json";
+@import "flowbite-react/plugin/tailwindcss";
+@source "../.flowbite-react/class-list.json";
+@import "./fonts.css";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* ====font */
+  --font-sans: kalameh_md;
+  --font-kalameh-bold: kalameh_bold;
+  --font-kalameh-md: kalameh_md;
+  --font-kalameh-black: kalameh_black;
+  /* ============================== */
+  --color-primary: #1a2a4f;
+  --color-secendary: #f7a5a5;
+  --color-third: #ffdbb6;
+  --color-background: #efece3;
+  --color-text-light: #fff;
+  --color-text-dark: #000;
+}
+
+@layer base {
+  input,
+  textarea,
+  select,
+  [type="checkbox"],
+  [type="radio"] {
+    @apply bg-background focus:border-gray-300! focus:ring-0! focus:outline-none!;
+  }
+}
+
+body {
+  @apply bg-background;
+  direction: rtl;
+}
