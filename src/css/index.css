@@ -24,9 +24,14 @@
   input,
   textarea,
   select,
+  button,
   [type="checkbox"],
   [type="radio"] {
-    @apply bg-background focus:border-gray-300! focus:ring-0! focus:outline-none!;
+    @apply focus:border-gray-300! focus:ring-0! focus:outline-none!;
+  }
+
+  button {
+    @apply cursor-pointer;
   }
 }
 

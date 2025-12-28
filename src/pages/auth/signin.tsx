@@ -1,24 +1,35 @@
 import { Button, Checkbox, Label, TextInput } from "flowbite-react";
 import { useFormik } from "formik";
 import { Link } from "react-router";
+import { Login } from "../../API/Auth";
+import toast from "react-hot-toast";
+
+type UserLogin = Record<string, never> | { username: string; password: string };
 
 export default function Signin() {
   const formik = useFormik({
     initialValues: { username: "", password: "" },
     validate(values) {
-      const err = { username: "", password: "" };
+      const err: Partial<UserLogin> = {};
 
       if (!values.username) {
         err.username = "نام کاربری نمیتواند خالی باشد";
-      } else if (!values.password) {
+      }
+      if (!values.password) {
         err.password = "رمز  عبور نمیتواند خالی باشد";
       }
 
       return err;
     },
 
-    onSubmit(values) {
-      console.log(values);
+    onSubmit: async (values) => {
+      const req = Login(values.username, values.password);
+
+      await toast.promise(req, {
+        loading: "درحال ارسال",
+        error: "نام کاربری یا رمز عبور اشتباه است",
+        success: "ورود با  موفقیت انجام شد",
+      });
     },
   });
 
@@ -72,7 +83,9 @@ export default function Signin() {
         <Checkbox id="remember" />
         <Label htmlFor="remember">مرا به یاد داشته باش</Label>
       </div>
-      <Button type="submit">ورود</Button>
+      <Button type="submit" disabled={formik.isSubmitting}>
+        ورود
+      </Button>
       <div className="flex items-center justify-between gap-2">
         <hr className="w-full border-gray-300" />
         <span>یا</span>
