@@ -3,24 +3,17 @@ import { useFormik } from "formik";
 import { Link } from "react-router";
 import { Login } from "../../API/Auth";
 import toast from "react-hot-toast";
-
-type UserLogin = Record<string, never> | { username: string; password: string };
+import * as Yup from "yup";
 
 export default function Signin() {
   const formik = useFormik({
     initialValues: { username: "", password: "" },
-    validate(values) {
-      const err: Partial<UserLogin> = {};
-
-      if (!values.username) {
-        err.username = "نام کاربری نمیتواند خالی باشد";
-      }
-      if (!values.password) {
-        err.password = "رمز  عبور نمیتواند خالی باشد";
-      }
-
-      return err;
-    },
+    validateOnBlur: true,
+    validateOnChange: false,
+    validationSchema: Yup.object({
+      username: Yup.string().required("نام کاربری خود را وارد کنید"),
+      password: Yup.string().required("کلمه عبور خود را وارد کنید"),
+    }),
 
     onSubmit: async (values) => {
       const req = Login(values.username, values.password);
