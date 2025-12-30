@@ -6,7 +6,7 @@ import { createBrowserRouter, Navigate, RouterProvider } from "react-router";
 import App from "./App.tsx";
 import "./css/index.css";
 import Theme from "./config/theme";
-import Layout from "./components/layout/index.tsx";
+import Privet_Layout from "./components/Privet_layout/index.tsx";
 import AuthLayout from "./components/AuthLayout/index.tsx";
 import Signin from "./pages/auth/signin.tsx";
 import Signup from "./pages/auth/signup.tsx";
@@ -24,7 +24,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/",
-    element: <Layout />,
+    element: <Privet_Layout />,
     children: [{ index: true, element: <App /> }],
   },
   {

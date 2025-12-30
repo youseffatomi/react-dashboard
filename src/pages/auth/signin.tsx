@@ -8,8 +8,8 @@ import * as Yup from "yup";
 export default function Signin() {
   const formik = useFormik({
     initialValues: { username: "", password: "" },
-    validateOnBlur: true,
-    validateOnChange: false,
+    validateOnBlur: false,
+    validateOnChange: true,
     validationSchema: Yup.object({
       username: Yup.string().required("نام کاربری خود را وارد کنید"),
       password: Yup.string().required("کلمه عبور خود را وارد کنید"),

@@ -12,12 +12,19 @@
   --font-kalameh-md: kalameh_md;
   --font-kalameh-black: kalameh_black;
   /* ============================== */
-  --color-primary: #1a2a4f;
-  --color-secendary: #f7a5a5;
-  --color-third: #ffdbb6;
-  --color-background: #efece3;
+  --color-primary: #2563eb;
+  --color-secondary: rgba(85 118 139);
+  --color-third: #10b981;
+  --color-background: rgba(233, 237, 247);
+  --color-surface: #fff;
+  --color-muted: #e5e7eb;
+  --color-warning: #f59e0b;
+  --color-error: #ef4444;
+  --color-info: #3b82f6;
+  --color-disabled: #d1d5db;
+  --color-light: #fff;
   --color-text-light: #fff;
-  --color-text-dark: #000;
+  --color-text-dark: #111827;
 }
 
 @layer base {
@@ -33,6 +40,11 @@
   button {
     @apply cursor-pointer;
   }
+}
+
+@utility container {
+  padding-inline: 15px;
+  margin-inline: auto;
 }
 
 body {
